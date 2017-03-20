@@ -1,0 +1,194 @@
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+@import 'motion-ui';
+
+@include foundation-global-styles;
+@include foundation-grid;
+// @include foundation-flex-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+// @include foundation-range-input;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-card;
+@include foundation-close-button;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-responsive-embed;
+@include foundation-label;
+@include foundation-media-object;
+@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+// @include foundation-progress-element;
+// @include foundation-meter-element;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+// @include foundation-flex-classes;
+
+@include motion-ui-transitions;
+@include motion-ui-animations;
+
+	body{
+		background:url('../img/logo.png') no-repeat;
+		background-color: #15151F;
+		color:white;
+	}
+	h1{
+		font-size:60px;
+		color:white;
+		font-family: 'Rokkitt', serif;
+	}
+	.form-control{
+		width:50%;
+		margin:0 auto;
+	}
+	.res{
+		margin-bottom:30px;
+		height:74px;
+	}
+	.results{
+		height:115px;
+		// width:50%;
+		// float:left;
+	}
+	#search{
+		font-size:40px;
+		font-family: 'Rokkitt', serif;
+	}
+	.date,.month{
+		float:left;
+	}
+	.date,#error{
+		line-height:74px;
+		background: #fff; 
+		text-align:center;
+		float:left;
+		font-size: 45px;
+		font-weight: bold;
+		color: #000;
+		text-transform: uppercase; 
+		padding: 5px;	
+	}
+	.month{
+		line-height:74px;
+		background: #d10000; 
+		float:left;
+		font-size: 45px; 
+		font-weight: bold; color: #fff; 
+		text-transform: uppercase; 
+		padding: 5px;	
+		margin-right:11px;
+	}
+	.place{
+		line-height: 27px;
+		background: #fff; 
+		font-weight: bold;
+		color: #000;
+		text-transform: uppercase; 
+		padding: 5px;	
+	}
+	.city{
+		line-height:27px;
+		background-color: #15151F;
+		color:white;
+		padding:5px;
+	}
+	.tickets{
+		background-color: #15151F;
+		color:#fff;
+		padding:5px;
+		margin-left:10px;
+	}
+	.tickets:hover{
+		background: #fff ;
+		border: 1px solid #15151F;
+		color: #15151F;
+		text-decoration: none;
+	}
+	.bandname-inner{
+		margin-bottom:10px;
+		text-align:center;
+		display: inline;
+		text-align:center;
+		background-color: white;
+		font-size: 45px; 
+		font-weight: bold; 
+		color: #000; 
+		text-transform: uppercase; 
+	}
+	.rec-inner{
+		font-size: 25px; 
+		font-weight: bold; 
+		color: #fff; 
+		text-transform: uppercase;
+		background-color: #15151F; 
+		text-align:center;
+	}
+	#container{
+		width:93%;
+		margin:0 auto;
+	}
+	#recommended{
+		width:45%;
+		float:right;
+	}
+	@media (min-width:320px) and (max-width: 1024px){ 
+		.date,.month{
+			line-height: 25px;
+			font-size:25px;
+		}
+		#search{
+			font-size:20px;
+		}
+		h1{
+			font-size:30px;
+		}
+		.place,.city{
+			width:100%;
+		}
+		.place{
+			font-size:10px;
+			margin-top:-25px;
+			text-align:left;
+		}
+		.date{
+			padding: 5px;	
+		}
+		.city{
+			border-bottom:2px solid white;
+		}
+		.res{
+		height:auto;
+	}
+		#bandname{
+			margin-bottom:40px;
+		}
+		#results,#recommended{
+			width:100%;
+		}
+		.rec-inner{
+			margin-bottom: 30px;
+		}
+	}
