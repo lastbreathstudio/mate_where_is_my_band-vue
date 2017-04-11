@@ -51,7 +51,7 @@
 @include motion-ui-animations;
 
 	body{
-		background:url('../img/logo.png') no-repeat;
+		background:url('../img/logo.jpg') no-repeat;
 		background-color: #15151F;
 		color:white;
 	}
@@ -69,19 +69,24 @@
 		height:74px;
 	}
 	.results{
-		height:115px;
+		height:125px;
 		// width:50%;
 		// float:left;
 	}
+.left{
+	border-right:20px solid transparent;
+}
 	#search{
 		font-size:40px;
 		font-family: 'Rokkitt', serif;
 	}
 	.date,.month{
 		float:left;
+		line-height:64px;
+line-height:64px;
 	}
 	.date,#error{
-		line-height:74px;
+		
 		background: #fff; 
 		text-align:center;
 		float:left;
@@ -92,7 +97,7 @@
 		padding: 5px;	
 	}
 	.month{
-		line-height:74px;
+		
 		background: #d10000; 
 		float:left;
 		font-size: 45px; 
@@ -107,13 +112,15 @@
 		font-weight: bold;
 		color: #000;
 		text-transform: uppercase; 
-		padding: 5px;	
+		padding: 10px;	
 	}
 	.city{
 		line-height:27px;
 		background-color: #15151F;
 		color:white;
 		padding:5px;
+		text-align:right;
+		padding-right:10px;
 	}
 	.tickets{
 		background-color: #15151F;
@@ -146,14 +153,14 @@
 		background-color: #15151F; 
 		text-align:center;
 	}
-	#container{
-		width:93%;
-		margin:0 auto;
+	.button{
+		 display: block;
+    	width: 100px;
+    	margin: 0 auto;
 	}
-	#recommended{
-		width:45%;
-		float:right;
-	}
+	[v-cloak] {
+  display: none;
+}
 	@media (min-width:320px) and (max-width: 1024px){ 
 		.date,.month{
 			line-height: 25px;

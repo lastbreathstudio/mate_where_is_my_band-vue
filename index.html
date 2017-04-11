@@ -9,25 +9,27 @@
   </head>
   <body>
   
-  <div id="app">
+  <div id="app" class="row">
  <h1 class="text-center">OI MATE,WHERE IS MY BAND???</h1>
-  <div class="large-8 column large-centered">
+  <div class="large-12 column ">
      <div id="search"><p class="text-center">Enter band name</p></div>
-      <input class="form-control" type="text" id="tag" name="tagsearch" size="35">
-      <a class="button btn-primary text-center center-block" id="submit" @click.stop="loadUsers">Search</a>
+      <input class="form-control" type="text" id="tag" name="tagsearch" size="35" v-model="band" @keyup.enter="loadUsers" />
+      <a class="button btn-primary text-center center-block" id="submit" @click.stop="loadUsers" :disabled="band.length < 1">Search</a>
       <div id="bandname">
-        <p class="bandname-inner"></p>
+       
       </div>
+      <div  v-cloak v-show="users.length == 0"><p class="rec-inner">{{error}}</p></div>
 
-      <div class="row">
-        <div class="results row" v-for="user in users">
-        <div class='date '>{{ user.datetime | day }}</div>
-        <div class='month'>{{ user.datetime | month }} </div>
-        <div class='place'>{{ user.title }}<a class='tickets' href='{{user.ticket_url}}'>tickets</a></div>
-        <div class='city'>{{ user.formatted_location }}</div>
-        </div>
-      <br>
-      <div id="recommended"></div>
+      <div class="row result" >
+      <div class="large-6 column left" >
+
+         <result  v-for="user in users" :user="user" v-show="users.length > 0"> </result>
+      </div>
+      <div id="recommended" class="large-6 column right" >
+      <p class="rec-inner" v-show="rec.length > 0" v-cloak>You may like these gigs near you</p>
+         <result  v-for="user in rec" :user="user" v-show="rec.length > 0"> </result>
+      </div>
+       
       </div>
   </div>
 
@@ -46,13 +48,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.8/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.16/vue-resource.min.js"></script>
       <script>
-        new Vue({
-          el: '#app',
-          data: {
-            users: [],
+        Vue.component('result', {
+          template: "<div class='results row'><div class='date'>{{ user.datetime | day}}</div><div class='month'>{{ user.datetime | month }} </div><div class='place'>{{ user.title }}<a class='tickets' href='{{user.ticket_url}}'>tickets</a></div><div class='city'>{{ user.formatted_location }}</div></div>",
+          props: ['user'],
 
-          },
-           filters: {
+          filters: {
             day:function(obj){
               var date = new Date(obj);
               var day = date.getDate();
@@ -63,25 +63,54 @@
               var date = new Date(obj);
               var day = date.getDate();
               var month = date.getMonth()+1;
-             var m_names = ["Jan", "Feb", "Mar", "Apr", "May", "June", 
+              var m_names = ["Jan", "Feb", "Mar", "Apr", "May", "June", 
                                "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
                                month = m_names[month];
                                return month;
-
             }
-          
+          }
+        })
+
+        new Vue({
+          el: '#app',
+          data: {
+            users: [],
+            rec:[],
+            band: '',
+            error: ''
           },
           methods: {
             loadUsers: function() {
-                // this.$http.get('aaa.txt').success(function(events) {  
-                  this.$http.get('http://api.bandsintown.com/artists/korn/events.json?api_version=2.0&app_id=sizoider').success(function(events) {
+                this.$http.get('http://api.bandsintown.com/artists/'+ this.band + '/events.json?api_version=2.0&app_id=sizoider').success(function(events) {
                   this.users = events;
-                  console.log(this.users);
+                  if(events.length == 0){
+                     this.error = 'Bummer!Nothing found!';
+                  }
+                  this.band = '';
+                
                 }).error(function(error) {
-                  console.log(error);
+                 
+                  this.band = '';
+                  this.users = '';
+                });
+                this.$http.get('http://api.bandsintown.com/artists/' + this.band + '/events/recommended?location=use_geoip&radius=50&only_recs=true&app_id=sizoider&api_version=2.0&format=json').success(function(events) {
+                  this.rec = events;
+                  this.band = '';
+                  if(events.length == 0){
+                     this.error = 'Bummer!Nothing found!';
+                  }
+                  console.log(this.rec);
+                
+                }).error(function(error) {
+                  this.error = 'Bummer!Nothing found!';
+                  this.band = '';
+                  this.rec = '';
                 });
             }
+           
+           
           }
+
 
         });
   </script>
